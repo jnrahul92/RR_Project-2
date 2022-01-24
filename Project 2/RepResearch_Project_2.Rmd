@@ -1,0 +1,165 @@
+---
+title: "Analyzing health and economic effects of storms on US"
+author: "Rahul Jain"
+date: "24/01/2022"
+output: html_document
+---
+
+# 1 Synopsis : 
+
+The goal of the project is to explore the NOAA Storm Dataset and analyze the impact of storms on US economy and health.
+The dataset covers the time prios between 1950 and November 2011.
+
+Health Impact from Storms - Tornado is the biggest contributor to fatalities contributing nearly 100k injuries or deaths. Other events contribution small in comparison to tornadoes
+
+Economic Impact from Storms - Floods and hurricanes are the biggest contributors to impact on Economy
+
+# 2 Dataset Source and other details : 
+
+Dataset Source : https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2
+
+Other useful information about dataset:
+
+* National Weather Service Storm Data Documentation : (https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2Fpd01016005curr.pdf)
+
+* National Climatic Data Center Storm Events FAQ (https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2FNCDC%20Storm%20Events-FAQ%20Page.pdf)
+
+# 3 Importing the libraries
+
+```{r echo=TRUE}
+library(ggplot2)
+library(reshape2)
+```
+
+# 4 Data Processing
+
+## 4.1 Downloading the data and loading into R
+
+```{r echo=TRUE,cache=TRUE}
+fileUrl <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2"
+download.file(fileUrl, destfile = paste0("/Users/jnrah/Downloads", '/repdata%2Fdata%2FStormData.csv.bz2'))
+stormDF <- read.csv("/Users/jnrah/Downloads/repdata%2Fdata%2FStormData.csv.bz2",na.strings = c(""))
+```
+
+## 4.2 Data Exploration
+
+### 4.2.1 Looking at the structure and summary of the dataset
+
+```{r echo=TRUE}
+head(stormDF)
+```
+
+```{r echo=TRUE}
+str(stormDF)
+```
+
+```{r echo=TRUE}
+summary(stormDF)
+```
+
+### 4.2.2 Looking at the amount of missing values in the data
+
+```{r echo=TRUE}
+sapply(stormDF,function(y) sum(length(which(is.na(y)))))
+```
+
+There are 37 variables in the data. Since we only need to examine health and economic impacts of storms on US, we
+can remove the variables which are not required for the analysis.
+
+## 4.3 Data Subsetting
+
+### 4.3.1 Only keeping variables useful for analysis
+
+```{r echo=TRUE}
+col2keep <- c('BGN_DATE','EVTYPE','FATALITIES','INJURIES','PROPDMG','PROPDMGEXP','CROPDMG','CROPDMGEXP')
+stormDF_sub <- stormDF[,col2keep]
+stormDF_sub <- subset(stormDF_sub,EVTYPE != "?")
+stormDF_sub$BGN_DATE <- as.Date(stormDF_sub$BGN_DATE,"%m/%d/%Y")
+```
+
+### 4.3.2 Subsetting data to create 2 different dataframes, one for analyzing health impact and other for economic impact
+
+```{r echo=TRUE}
+stormDF_health <- stormDF[,c('BGN_DATE','EVTYPE','FATALITIES','INJURIES')]
+stormDF_health <- subset(stormDF_health,FATALITIES > 0 | INJURIES > 0)
+```
+
+```{r echo=TRUE}
+stormDF_eco <- stormDF[,c('BGN_DATE','EVTYPE','PROPDMG','PROPDMGEXP','CROPDMG','CROPDMGEXP')]
+stormDF_eco <- subset(stormDF_eco,PROPDMG > 0 | CROPDMG > 0)
+```
+
+### 4.3.3 Converting columns in stormDF_eco from exponent to numeric values
+
+```{r echo=TRUE}
+cropDmgKey <- c("?" = 10^0,"0" = 10^0,"K"=10^3,"M"=10^6,"B"=10^9)
+stormDF_eco$CROPDMGEXP <- as.character(stormDF_eco$CROPDMGEXP)
+stormDF_eco$CROPDMGEXP <- toupper(stormDF_eco$CROPDMGEXP)
+stormDF_eco$CROPDMGEXP <- cropDmgKey[stormDF_eco$CROPDMGEXP]
+stormDF_eco$CROPDMGEXP[is.na(stormDF_eco$CROPDMGEXP)] <- 1
+```
+
+```{r echo=TRUE}
+propDmgKey <- c("?" = 1,"-"=1,"+"=1,"0" = 1,"2"=10^2,"3"=10^3,"4"=10^4,"5"=10^5,
+                "6"=10^6,"7"=10^7,"H"=10^6,
+                "K"=10^3,"M"=10^6,"B"=10^9)
+stormDF_eco$PROPDMGEXP <- as.character(stormDF_eco$PROPDMGEXP)
+stormDF_eco$PROPDMGEXP <- toupper(stormDF_eco$PROPDMGEXP)
+stormDF_eco$PROPDMGEXP <- propDmgKey[stormDF_eco$PROPDMGEXP]
+stormDF_eco$PROPDMGEXP[is.na(stormDF_eco$PROPDMGEXP)] <- 1
+```
+
+
+### 4.3.4 Making Economic Cost Columns
+
+```{r echo=TRUE}
+stormDF_eco$prop.cost <- stormDF_eco$PROPDMGEXP * stormDF_eco$PROPDMG
+stormDF_eco$crop.cost <- stormDF_eco$CROPDMGEXP * stormDF_eco$CROPDMG
+stormDF_eco$total.cost <- stormDF_eco$prop.cost + stormDF_eco$crop.cost
+```
+
+### 4.3.5 Making Health Cost Columns
+
+```{r echo=TRUE}
+stormDF_health$total_fatal <- stormDF_health$FATALITIES + stormDF_health$INJURIES
+```
+
+## 4.4 Creating summary dataframes for visualization
+
+### 4.4.1 Economic Cost Dataframe
+
+```{r echo=TRUE}
+totalCost <- aggregate(stormDF_eco$total.cost~stormDF_eco$EVTYPE,FUN = sum)
+names(totalCost) <- c("Event.Type","Total.Economic.Cost")
+```
+
+### 4.4.2 Health Cost Dataframe
+
+```{r echo=TRUE}
+healthCost <- aggregate(stormDF_health$total_fatal~stormDF_health$EVTYPE,FUN = sum)
+names(healthCost) <- c("Event.Type","Total.Health.Cost")
+```
+
+#5 Results
+
+## 5.1 Analyzing Health Cost
+
+```{r echo=TRUE}
+healthCost <- healthCost[order(-healthCost$Total.Health.Cost),]
+top10_healthCost <- head(healthCost,10)
+g1 <- ggplot(top10_healthCost,aes(reorder(Event.Type,-Total.Health.Cost),Total.Health.Cost))
+g1 + geom_bar(stat = "identity",aes(fill=Event.Type),position = "dodge") + ylab("Frequency Count")  +
+    xlab("Event Type") + theme(axis.text.x = element_text(angle=45, hjust=1)) +
+    ggtitle("Top 10 US Killers") + theme(plot.title = element_text(hjust = 0.5))
+```
+
+## 5.2 Analyzing Economic Cost
+
+```{r echo=TRUE}
+ecoCost <- totalCost[order(-totalCost$Total.Economic.Cost),]
+top10_ecoCost <- head(ecoCost,10)
+g2 <- ggplot(top10_ecoCost,aes(reorder(Event.Type,-Total.Economic.Cost),Total.Economic.Cost))
+g2 + geom_bar(stat = "identity",aes(fill=Event.Type),position = "dodge") + ylab("Frequency Count")  +
+    xlab("Event Type") + theme(axis.text.x = element_text(angle=45, hjust=1)) +
+    ggtitle("Top 10 Events Causing harm to Economy") + theme(plot.title = element_text(hjust = 0.5))
+```

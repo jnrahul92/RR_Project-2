@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>1 Synopsis :</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>1 Synopsis :</h1>
+
+<p>The goal of the project is to explore the NOAA Storm Dataset and analyze the impact of storms on US economy and health.
+The dataset covers the time prios between 1950 and November 2011.</p>
+
+<p>Health Impact from Storms - Tornado is the biggest contributor to fatalities contributing nearly 100k injuries or deaths. Other events contribution small in comparison to tornadoes</p>
+
+<p>Economic Impact from Storms - Floods and hurricanes are the biggest contributors to impact on Economy</p>
+
+<h1>2 Dataset Source and other details :</h1>
+
+<p>Dataset Source : <a href="https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2">https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2</a></p>
+
+<p>Other useful information about dataset:</p>
+
+<ul>
+<li><p>National Weather Service Storm Data Documentation : (<a href="https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2Fpd01016005curr.pdf">https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2Fpd01016005curr.pdf</a>)</p></li>
+<li><p>National Climatic Data Center Storm Events FAQ (<a href="https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2FNCDC%20Storm%20Events-FAQ%20Page.pdf">https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2FNCDC%20Storm%20Events-FAQ%20Page.pdf</a>)</p></li>
+</ul>
+
+<h1>3 Importing the libraries</h1>
+
+<pre><code class="r">library(ggplot2)
+library(reshape2)
+</code></pre>
+
+<h1>4 Data Processing</h1>
+
+<h2>4.1 Downloading the data and loading into R</h2>
+
+<pre><code class="r">fileUrl &lt;- &quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2&quot;
+download.file(fileUrl, destfile = paste0(&quot;/Users/jnrah/Downloads&quot;, &#39;/repdata%2Fdata%2FStormData.csv.bz2&#39;))
+stormDF &lt;- read.csv(&quot;/Users/jnrah/Downloads/repdata%2Fdata%2FStormData.csv.bz2&quot;,na.strings = c(&quot;&quot;))
+</code></pre>
+
+<h2>4.2 Data Exploration</h2>
+
+<h3>4.2.1 Looking at the structure and summary of the dataset</h3>
+
+<pre><code class="r">head(stormDF)
+</code></pre>
+
+<pre><code>##   STATE__           BGN_DATE BGN_TIME TIME_ZONE COUNTY COUNTYNAME STATE  EVTYPE BGN_RANGE BGN_AZI BGN_LOCATI END_DATE
+## 1       1  4/18/1950 0:00:00     0130       CST     97     MOBILE    AL TORNADO         0    &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;
+## 2       1  4/18/1950 0:00:00     0145       CST      3    BALDWIN    AL TORNADO         0    &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;
+## 3       1  2/20/1951 0:00:00     1600       CST     57    FAYETTE    AL TORNADO         0    &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;
+## 4       1   6/8/1951 0:00:00     0900       CST     89    MADISON    AL TORNADO         0    &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;
+## 5       1 11/15/1951 0:00:00     1500       CST     43    CULLMAN    AL TORNADO         0    &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;
+## 6       1 11/15/1951 0:00:00     2000       CST     77 LAUDERDALE    AL TORNADO         0    &lt;NA&gt;       &lt;NA&gt;     &lt;NA&gt;
+##   END_TIME COUNTY_END COUNTYENDN END_RANGE END_AZI END_LOCATI LENGTH WIDTH F MAG FATALITIES INJURIES PROPDMG PROPDMGEXP
+## 1     &lt;NA&gt;          0         NA         0    &lt;NA&gt;       &lt;NA&gt;   14.0   100 3   0          0       15    25.0          K
+## 2     &lt;NA&gt;          0         NA         0    &lt;NA&gt;       &lt;NA&gt;    2.0   150 2   0          0        0     2.5          K
+## 3     &lt;NA&gt;          0         NA         0    &lt;NA&gt;       &lt;NA&gt;    0.1   123 2   0          0        2    25.0          K
+## 4     &lt;NA&gt;          0         NA         0    &lt;NA&gt;       &lt;NA&gt;    0.0   100 2   0          0        2     2.5          K
+## 5     &lt;NA&gt;          0         NA         0    &lt;NA&gt;       &lt;NA&gt;    0.0   150 2   0          0        2     2.5          K
+## 6     &lt;NA&gt;          0         NA         0    &lt;NA&gt;       &lt;NA&gt;    1.5   177 2   0          0        6     2.5          K
+##   CROPDMG CROPDMGEXP  WFO STATEOFFIC ZONENAMES LATITUDE LONGITUDE LATITUDE_E LONGITUDE_ REMARKS REFNUM
+## 1       0       &lt;NA&gt; &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;     3040      8812       3051       8806    &lt;NA&gt;      1
+## 2       0       &lt;NA&gt; &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;     3042      8755          0          0    &lt;NA&gt;      2
+## 3       0       &lt;NA&gt; &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;     3340      8742          0          0    &lt;NA&gt;      3
+## 4       0       &lt;NA&gt; &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;     3458      8626          0          0    &lt;NA&gt;      4
+## 5       0       &lt;NA&gt; &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;     3412      8642          0          0    &lt;NA&gt;      5
+## 6       0       &lt;NA&gt; &lt;NA&gt;       &lt;NA&gt;      &lt;NA&gt;     3450      8748          0          0    &lt;NA&gt;      6
+</code></pre>
+
+<pre><code class="r">str(stormDF)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    902297 obs. of  37 variables:
+##  $ STATE__   : num  1 1 1 1 1 1 1 1 1 1 ...
+##  $ BGN_DATE  : chr  &quot;4/18/1950 0:00:00&quot; &quot;4/18/1950 0:00:00&quot; &quot;2/20/1951 0:00:00&quot; &quot;6/8/1951 0:00:00&quot; ...
+##  $ BGN_TIME  : chr  &quot;0130&quot; &quot;0145&quot; &quot;1600&quot; &quot;0900&quot; ...
+##  $ TIME_ZONE : chr  &quot;CST&quot; &quot;CST&quot; &quot;CST&quot; &quot;CST&quot; ...
+##  $ COUNTY    : num  97 3 57 89 43 77 9 123 125 57 ...
+##  $ COUNTYNAME: chr  &quot;MOBILE&quot; &quot;BALDWIN&quot; &quot;FAYETTE&quot; &quot;MADISON&quot; ...
+##  $ STATE     : chr  &quot;AL&quot; &quot;AL&quot; &quot;AL&quot; &quot;AL&quot; ...
+##  $ EVTYPE    : chr  &quot;TORNADO&quot; &quot;TORNADO&quot; &quot;TORNADO&quot; &quot;TORNADO&quot; ...
+##  $ BGN_RANGE : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ BGN_AZI   : chr  NA NA NA NA ...
+##  $ BGN_LOCATI: chr  NA NA NA NA ...
+##  $ END_DATE  : chr  NA NA NA NA ...
+##  $ END_TIME  : chr  NA NA NA NA ...
+##  $ COUNTY_END: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ COUNTYENDN: logi  NA NA NA NA NA NA ...
+##  $ END_RANGE : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ END_AZI   : chr  NA NA NA NA ...
+##  $ END_LOCATI: chr  NA NA NA NA ...
+##  $ LENGTH    : num  14 2 0.1 0 0 1.5 1.5 0 3.3 2.3 ...
+##  $ WIDTH     : num  100 150 123 100 150 177 33 33 100 100 ...
+##  $ F         : int  3 2 2 2 2 2 2 1 3 3 ...
+##  $ MAG       : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ FATALITIES: num  0 0 0 0 0 0 0 0 1 0 ...
+##  $ INJURIES  : num  15 0 2 2 2 6 1 0 14 0 ...
+##  $ PROPDMG   : num  25 2.5 25 2.5 2.5 2.5 2.5 2.5 25 25 ...
+##  $ PROPDMGEXP: chr  &quot;K&quot; &quot;K&quot; &quot;K&quot; &quot;K&quot; ...
+##  $ CROPDMG   : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ CROPDMGEXP: chr  NA NA NA NA ...
+##  $ WFO       : chr  NA NA NA NA ...
+##  $ STATEOFFIC: chr  NA NA NA NA ...
+##  $ ZONENAMES : chr  NA NA NA NA ...
+##  $ LATITUDE  : num  3040 3042 3340 3458 3412 ...
+##  $ LONGITUDE : num  8812 8755 8742 8626 8642 ...
+##  $ LATITUDE_E: num  3051 0 0 0 0 ...
+##  $ LONGITUDE_: num  8806 0 0 0 0 ...
+##  $ REMARKS   : chr  NA NA NA NA ...
+##  $ REFNUM    : num  1 2 3 4 5 6 7 8 9 10 ...
+</code></pre>
+
+<pre><code class="r">summary(stormDF)
+</code></pre>
+
+<pre><code>##     STATE__       BGN_DATE           BGN_TIME          TIME_ZONE             COUNTY       COUNTYNAME       
+##  Min.   : 1.0   Length:902297      Length:902297      Length:902297      Min.   :  0.0   Length:902297     
+##  1st Qu.:19.0   Class :character   Class :character   Class :character   1st Qu.: 31.0   Class :character  
+##  Median :30.0   Mode  :character   Mode  :character   Mode  :character   Median : 75.0   Mode  :character  
+##  Mean   :31.2                                                            Mean   :100.6                     
+##  3rd Qu.:45.0                                                            3rd Qu.:131.0                     
+##  Max.   :95.0                                                            Max.   :873.0                     
+##                                                                                                            
+##     STATE              EVTYPE            BGN_RANGE          BGN_AZI           BGN_LOCATI          END_DATE        
+##  Length:902297      Length:902297      Min.   :   0.000   Length:902297      Length:902297      Length:902297     
+##  Class :character   Class :character   1st Qu.:   0.000   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Median :   0.000   Mode  :character   Mode  :character   Mode  :character  
+##                                        Mean   :   1.484                                                           
+##                                        3rd Qu.:   1.000                                                           
+##                                        Max.   :3749.000                                                           
+##                                                                                                                   
+##    END_TIME           COUNTY_END COUNTYENDN       END_RANGE          END_AZI           END_LOCATI       
+##  Length:902297      Min.   :0    Mode:logical   Min.   :  0.0000   Length:902297      Length:902297     
+##  Class :character   1st Qu.:0    NA&#39;s:902297    1st Qu.:  0.0000   Class :character   Class :character  
+##  Mode  :character   Median :0                   Median :  0.0000   Mode  :character   Mode  :character  
+##                     Mean   :0                   Mean   :  0.9862                                        
+##                     3rd Qu.:0                   3rd Qu.:  0.0000                                        
+##                     Max.   :0                   Max.   :925.0000                                        
+##                                                                                                         
+##      LENGTH              WIDTH                F               MAG            FATALITIES          INJURIES        
+##  Min.   :   0.0000   Min.   :   0.000   Min.   :0.0      Min.   :    0.0   Min.   :  0.0000   Min.   :   0.0000  
+##  1st Qu.:   0.0000   1st Qu.:   0.000   1st Qu.:0.0      1st Qu.:    0.0   1st Qu.:  0.0000   1st Qu.:   0.0000  
+##  Median :   0.0000   Median :   0.000   Median :1.0      Median :   50.0   Median :  0.0000   Median :   0.0000  
+##  Mean   :   0.2301   Mean   :   7.503   Mean   :0.9      Mean   :   46.9   Mean   :  0.0168   Mean   :   0.1557  
+##  3rd Qu.:   0.0000   3rd Qu.:   0.000   3rd Qu.:1.0      3rd Qu.:   75.0   3rd Qu.:  0.0000   3rd Qu.:   0.0000  
+##  Max.   :2315.0000   Max.   :4400.000   Max.   :5.0      Max.   :22000.0   Max.   :583.0000   Max.   :1700.0000  
+##                                         NA&#39;s   :843563                                                           
+##     PROPDMG         PROPDMGEXP           CROPDMG         CROPDMGEXP            WFO             STATEOFFIC       
+##  Min.   :   0.00   Length:902297      Min.   :  0.000   Length:902297      Length:902297      Length:902297     
+##  1st Qu.:   0.00   Class :character   1st Qu.:  0.000   Class :character   Class :character   Class :character  
+##  Median :   0.00   Mode  :character   Median :  0.000   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :  12.06                      Mean   :  1.527                                                           
+##  3rd Qu.:   0.50                      3rd Qu.:  0.000                                                           
+##  Max.   :5000.00                      Max.   :990.000                                                           
+##                                                                                                                 
+##   ZONENAMES            LATITUDE      LONGITUDE        LATITUDE_E     LONGITUDE_       REMARKS              REFNUM      
+##  Length:902297      Min.   :   0   Min.   :-14451   Min.   :   0   Min.   :-14455   Length:902297      Min.   :     1  
+##  Class :character   1st Qu.:2802   1st Qu.:  7247   1st Qu.:   0   1st Qu.:     0   Class :character   1st Qu.:225575  
+##  Mode  :character   Median :3540   Median :  8707   Median :   0   Median :     0   Mode  :character   Median :451149  
+##                     Mean   :2875   Mean   :  6940   Mean   :1452   Mean   :  3509                      Mean   :451149  
+##                     3rd Qu.:4019   3rd Qu.:  9605   3rd Qu.:3549   3rd Qu.:  8735                      3rd Qu.:676723  
+##                     Max.   :9706   Max.   : 17124   Max.   :9706   Max.   :106220                      Max.   :902297  
+##                     NA&#39;s   :47                      NA&#39;s   :40
+</code></pre>
+
+<h3>4.2.2 Looking at the amount of missing values in the data</h3>
+
+<pre><code class="r">sapply(stormDF,function(y) sum(length(which(is.na(y)))))
+</code></pre>
+
+<pre><code>##    STATE__   BGN_DATE   BGN_TIME  TIME_ZONE     COUNTY COUNTYNAME      STATE     EVTYPE  BGN_RANGE    BGN_AZI BGN_LOCATI 
+##          0          0          0          0          0       1589          0          0          0     547332     287743 
+##   END_DATE   END_TIME COUNTY_END COUNTYENDN  END_RANGE    END_AZI END_LOCATI     LENGTH      WIDTH          F        MAG 
+##     243411     238978          0     902297          0     724837     499225          0          0     843563          0 
+## FATALITIES   INJURIES    PROPDMG PROPDMGEXP    CROPDMG CROPDMGEXP        WFO STATEOFFIC  ZONENAMES   LATITUDE  LONGITUDE 
+##          0          0          0     465934          0     618413     142069     248769     594029         47          0 
+## LATITUDE_E LONGITUDE_    REMARKS     REFNUM 
+##         40          0     287433          0
+</code></pre>
+
+<p>There are 37 variables in the data. Since we only need to examine health and economic impacts of storms on US, we
+can remove the variables which are not required for the analysis.</p>
+
+<h2>4.3 Data Subsetting</h2>
+
+<h3>4.3.1 Only keeping variables useful for analysis</h3>
+
+<pre><code class="r">col2keep &lt;- c(&#39;BGN_DATE&#39;,&#39;EVTYPE&#39;,&#39;FATALITIES&#39;,&#39;INJURIES&#39;,&#39;PROPDMG&#39;,&#39;PROPDMGEXP&#39;,&#39;CROPDMG&#39;,&#39;CROPDMGEXP&#39;)
+stormDF_sub &lt;- stormDF[,col2keep]
+stormDF_sub &lt;- subset(stormDF_sub,EVTYPE != &quot;?&quot;)
+stormDF_sub$BGN_DATE &lt;- as.Date(stormDF_sub$BGN_DATE,&quot;%m/%d/%Y&quot;)
+</code></pre>
+
+<h3>4.3.2 Subsetting data to create 2 different dataframes, one for analyzing health impact and other for economic impact</h3>
+
+<pre><code class="r">stormDF_health &lt;- stormDF[,c(&#39;BGN_DATE&#39;,&#39;EVTYPE&#39;,&#39;FATALITIES&#39;,&#39;INJURIES&#39;)]
+stormDF_health &lt;- subset(stormDF_health,FATALITIES &gt; 0 | INJURIES &gt; 0)
+</code></pre>
+
+<pre><code class="r">stormDF_eco &lt;- stormDF[,c(&#39;BGN_DATE&#39;,&#39;EVTYPE&#39;,&#39;PROPDMG&#39;,&#39;PROPDMGEXP&#39;,&#39;CROPDMG&#39;,&#39;CROPDMGEXP&#39;)]
+stormDF_eco &lt;- subset(stormDF_eco,PROPDMG &gt; 0 | CROPDMG &gt; 0)
+</code></pre>
+
+<h3>4.3.3 Converting columns in stormDF_eco from exponent to numeric values</h3>
+
+<pre><code class="r">cropDmgKey &lt;- c(&quot;?&quot; = 10^0,&quot;0&quot; = 10^0,&quot;K&quot;=10^3,&quot;M&quot;=10^6,&quot;B&quot;=10^9)
+stormDF_eco$CROPDMGEXP &lt;- as.character(stormDF_eco$CROPDMGEXP)
+stormDF_eco$CROPDMGEXP &lt;- toupper(stormDF_eco$CROPDMGEXP)
+stormDF_eco$CROPDMGEXP &lt;- cropDmgKey[stormDF_eco$CROPDMGEXP]
+stormDF_eco$CROPDMGEXP[is.na(stormDF_eco$CROPDMGEXP)] &lt;- 1
+</code></pre>
+
+<pre><code class="r">propDmgKey &lt;- c(&quot;?&quot; = 1,&quot;-&quot;=1,&quot;+&quot;=1,&quot;0&quot; = 1,&quot;2&quot;=10^2,&quot;3&quot;=10^3,&quot;4&quot;=10^4,&quot;5&quot;=10^5,
+                &quot;6&quot;=10^6,&quot;7&quot;=10^7,&quot;H&quot;=10^6,
+                &quot;K&quot;=10^3,&quot;M&quot;=10^6,&quot;B&quot;=10^9)
+stormDF_eco$PROPDMGEXP &lt;- as.character(stormDF_eco$PROPDMGEXP)
+stormDF_eco$PROPDMGEXP &lt;- toupper(stormDF_eco$PROPDMGEXP)
+stormDF_eco$PROPDMGEXP &lt;- propDmgKey[stormDF_eco$PROPDMGEXP]
+stormDF_eco$PROPDMGEXP[is.na(stormDF_eco$PROPDMGEXP)] &lt;- 1
+</code></pre>
+
+<h3>4.3.4 Making Economic Cost Columns</h3>
+
+<pre><code class="r">stormDF_eco$prop.cost &lt;- stormDF_eco$PROPDMGEXP * stormDF_eco$PROPDMG
+stormDF_eco$crop.cost &lt;- stormDF_eco$CROPDMGEXP * stormDF_eco$CROPDMG
+stormDF_eco$total.cost &lt;- stormDF_eco$prop.cost + stormDF_eco$crop.cost
+</code></pre>
+
+<h3>4.3.5 Making Health Cost Columns</h3>
+
+<pre><code class="r">stormDF_health$total_fatal &lt;- stormDF_health$FATALITIES + stormDF_health$INJURIES
+</code></pre>
+
+<h2>4.4 Creating summary dataframes for visualization</h2>
+
+<h3>4.4.1 Economic Cost Dataframe</h3>
+
+<pre><code class="r">totalCost &lt;- aggregate(stormDF_eco$total.cost~stormDF_eco$EVTYPE,FUN = sum)
+names(totalCost) &lt;- c(&quot;Event.Type&quot;,&quot;Total.Economic.Cost&quot;)
+</code></pre>
+
+<h3>4.4.2 Health Cost Dataframe</h3>
+
+<pre><code class="r">healthCost &lt;- aggregate(stormDF_health$total_fatal~stormDF_health$EVTYPE,FUN = sum)
+names(healthCost) &lt;- c(&quot;Event.Type&quot;,&quot;Total.Health.Cost&quot;)
+</code></pre>
+
+<p>#5 Results</p>
+
+<h2>5.1 Analyzing Health Cost</h2>
+
+<pre><code class="r">healthCost &lt;- healthCost[order(-healthCost$Total.Health.Cost),]
+top10_healthCost &lt;- head(healthCost,10)
+g1 &lt;- ggplot(top10_healthCost,aes(reorder(Event.Type,-Total.Health.Cost),Total.Health.Cost))
+g1 + geom_bar(stat = &quot;identity&quot;,aes(fill=Event.Type),position = &quot;dodge&quot;) + ylab(&quot;Frequency Count&quot;)  +
+    xlab(&quot;Event Type&quot;) + theme(axis.text.x = element_text(angle=45, hjust=1)) +
+    ggtitle(&quot;Top 10 US Killers&quot;) + theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-49"/></p>
+
+<h2>5.2 Analyzing Economic Cost</h2>
+
+<pre><code class="r">ecoCost &lt;- totalCost[order(-totalCost$Total.Economic.Cost),]
+top10_ecoCost &lt;- head(ecoCost,10)
+g2 &lt;- ggplot(top10_ecoCost,aes(reorder(Event.Type,-Total.Economic.Cost),Total.Economic.Cost))
+g2 + geom_bar(stat = &quot;identity&quot;,aes(fill=Event.Type),position = &quot;dodge&quot;) + ylab(&quot;Frequency Count&quot;)  +
+    xlab(&quot;Event Type&quot;) + theme(axis.text.x = element_text(angle=45, hjust=1)) +
+    ggtitle(&quot;Top 10 Events Causing harm to Economy&quot;) + theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-50"/></p>
+
+</body>
+
+</html>
